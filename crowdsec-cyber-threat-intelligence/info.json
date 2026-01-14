@@ -1,0 +1,1427 @@
+{
+  "name": "crowdsec-cyber-threat-intelligence",
+  "version": "1.0.0",
+  "label": "CrowdSec Cyber Threat Intelligence",
+  "description": "CrowdSec Cyber Threat Intelligence & Service APIs provide a unified, real-time threat intelligence and automation platform that enables organizations to detect, enrich, and respond to cyber threats at scale.",
+  "publisher": "SpryIQ.co",
+  "category": [
+    "Threat Intelligence"
+  ],
+  "contributor": "amey-spryiq",
+  "cs_compatible": true,
+  "help_online": "https://github.com/fortinet-fortisoar/connector-crowdsec-cyber-threat-intelligence/blob/release/1.0.0/docs/readme.md",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "configuration": {
+    "fields": [
+      {
+        "title": "CTI Base URL",
+        "type": "url",
+        "name": "cti_base_url",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "value": "https://cti.api.crowdsec.net/v2",
+        "description": "Specify the base endpoint for the CrowdSec Cyber Threat Intelligence (CTI) API. All CTI requests (IP reputation, enrichment, behaviors) are sent to this URL.",
+        "tooltip": "Default CTI endpoint is https://cti.api.crowdsec.net/v2. Change only if CrowdSec provides a different endpoint."
+      },
+      {
+        "title": "CTI API Key",
+        "type": "password",
+        "name": "cti_api_key",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "description": "Specify the API key used to authenticate requests to the CrowdSec CTI API. This key identifies your organization and grants access to threat intelligence data.",
+        "tooltip": "Generate this key from the CrowdSec Console. Required for CTI queries and smoke tests."
+      },
+      {
+        "title": "Service API Base URL",
+        "type": "url",
+        "name": "service_api_base_url",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": "https://admin.api.crowdsec.net/v1",
+        "description": "Specify the base endpoint for the CrowdSec Service (Admin) API. Used for managing services such as blocklists, decisions, or organization-level operations.",
+        "tooltip": "Only required if you plan to use Service API features (e.g., blocklist or decision management)."
+      },
+      {
+        "title": "Service API Key",
+        "type": "password",
+        "name": "service_api_key",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "description": "Specify the API key used to authenticate requests to the CrowdSec Service (Admin) API. Grants permission to manage resources such as blocklists and decisions.",
+        "tooltip": "Obtain this key from the CrowdSec Console. Needed only for Service API operations, not for CTI lookups."
+      },
+      {
+        "title": "Verify SSL",
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": false,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_ip_reputation",
+      "title": "Get IP Reputation",
+      "description": "Retrieve detailed threat intelligence, reputation scoring, and behavioral context for a given IP address using the CrowdSec CTI API.",
+      "category": "investigation",
+      "annotation": "get_ip_reputation",
+      "parameters": [
+        {
+          "title": "IP Address",
+          "description": "Specify the IPv4 or IPv6 address to investigate for malicious activity, reputation, and threat context.",
+          "type": "text",
+          "name": "ip_address",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify a valid IPv4 or IPv6 address (e.g., 8.8.8.8 or 2001:4860:4860::8888)."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ip": "",
+        "reputation": "",
+        "ip_range": "",
+        "background_noise": "",
+        "confidence": "",
+        "background_noise_score": "",
+        "ip_range_score": "",
+        "as_name": "",
+        "as_num": "",
+        "ip_range_24": "",
+        "ip_range_24_reputation": "",
+        "ip_range_24_score": "",
+        "location": {
+          "country": "",
+          "city": "",
+          "latitude": "",
+          "longitude": ""
+        },
+        "reverse_dns": "",
+        "behaviors": [],
+        "history": {
+          "first_seen": "",
+          "last_seen": "",
+          "full_age": "",
+          "days_age": ""
+        },
+        "classifications": {
+          "false_positives": [],
+          "classifications": []
+        },
+        "attack_details": [],
+        "target_countries": {},
+        "mitre_techniques": [],
+        "cves": [],
+        "scores": {
+          "overall": {
+            "aggressiveness": "",
+            "threat": "",
+            "trust": "",
+            "anomaly": "",
+            "total": ""
+          },
+          "last_day": {
+            "aggressiveness": "",
+            "threat": "",
+            "trust": "",
+            "anomaly": "",
+            "total": ""
+          },
+          "last_week": {
+            "aggressiveness": "",
+            "threat": "",
+            "trust": "",
+            "anomaly": "",
+            "total": ""
+          },
+          "last_month": {
+            "aggressiveness": "",
+            "threat": "",
+            "trust": "",
+            "anomaly": "",
+            "total": ""
+          }
+        },
+        "references": []
+      }
+    },
+    {
+      "operation": "search_ip_reputation",
+      "title": "Search IP Reputation",
+      "description": "Search CrowdSec Cyber Threat Intelligence for IP addresses matching a Lucene query, with optional time filtering and pagination.",
+      "category": "investigation",
+      "annotation": "search_ip_reputation",
+      "parameters": [
+        {
+          "title": "Query",
+          "description": "Lucene query used to filter IPs based on CrowdSec CTI fields such as behaviors, classifications, ASN, or location.",
+          "type": "text",
+          "name": "query",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Use Lucene syntax (e.g., behaviors.label:\"SSH Bruteforce\")."
+        },
+        {
+          "title": "Since",
+          "description": "Restrict results to IPs observed within a given time window.",
+          "type": "text",
+          "name": "since",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Time window format: 1m, 15m, 1h, 24h, 7d. If omitted, no time filtering is applied."
+        },
+        {
+          "title": "Page",
+          "description": "Page number used for paginated results.",
+          "type": "integer",
+          "name": "page",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Default is page 1. Use this to navigate through large result sets."
+        },
+        {
+          "title": "Limit",
+          "description": "Maximum number of IP results returned per page.",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Default is 10. Maximum is 10 for Community CTI users; higher limits may be available for paid plans."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "total": "",
+        "not_found": "",
+        "items": [
+          {
+            "ip": "",
+            "reputation": "",
+            "ip_range": "",
+            "ip_range_score": "",
+            "ip_range_24": "",
+            "ip_range_24_reputation": "",
+            "ip_range_24_score": "",
+            "as_name": "",
+            "as_num": "",
+            "background_noise_score": "",
+            "background_noise": "",
+            "confidence": "",
+            "location": {
+              "country": "",
+              "city": "",
+              "latitude": "",
+              "longitude": ""
+            },
+            "reverse_dns": "",
+            "behaviors": [],
+            "references": [],
+            "history": {
+              "first_seen": "",
+              "last_seen": "",
+              "full_age": "",
+              "days_age": ""
+            },
+            "classifications": {
+              "false_positives": [],
+              "classifications": []
+            },
+            "mitre_techniques": [],
+            "cves": [],
+            "attack_details": [],
+            "target_countries": {},
+            "scores": {
+              "overall": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_day": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_week": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_month": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation": "batch_get_ip_reputation",
+      "title": "Batch Get IP Reputation",
+      "description": "Retrieve threat intelligence and reputation data for multiple IP addresses in a single request using the CrowdSec CTI API.",
+      "category": "investigation",
+      "annotation": "batch_get_ip_reputation",
+      "parameters": [
+        {
+          "title": "IP Addresses",
+          "description": "Specify the list of IPv4 and/or IPv6 addresses to query in bulk.",
+          "type": "textarea",
+          "name": "ips",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the IPs separated by commas or new lines. Example: 1.1.1.1, 8.8.8.8. Ensure the number of IPs does not exceed CTI batch limits."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "total": "",
+        "not_found": "",
+        "items": [
+          {
+            "ip": "",
+            "reputation": "",
+            "ip_range": "",
+            "ip_range_score": "",
+            "ip_range_24": "",
+            "ip_range_24_reputation": "",
+            "ip_range_24_score": "",
+            "as_name": "",
+            "as_num": "",
+            "background_noise_score": "",
+            "background_noise": "",
+            "confidence": "",
+            "location": {
+              "country": "",
+              "city": "",
+              "latitude": "",
+              "longitude": ""
+            },
+            "reverse_dns": "",
+            "behaviors": [],
+            "references": [],
+            "history": {
+              "first_seen": "",
+              "last_seen": "",
+              "full_age": "",
+              "days_age": ""
+            },
+            "classifications": {
+              "false_positives": [],
+              "classifications": []
+            },
+            "mitre_techniques": [],
+            "cves": [],
+            "attack_details": [],
+            "target_countries": {},
+            "scores": {
+              "overall": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_day": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_week": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_month": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_malevolent_ips",
+      "title": "Get Fire IPs",
+      "description": "Retrieve a paginated list of malevolent IP addresses from the CrowdSec CTI API, with optional filtering based on last modification time.",
+      "category": "investigation",
+      "annotation": "get_malevolent_ips",
+      "parameters": [
+        {
+          "title": "Page",
+          "description": "Page number used to paginate through the list of malevolent IPs.",
+          "type": "integer",
+          "name": "page",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "1",
+          "tooltip": "Default is 1. Use this parameter to navigate between result pages."
+        },
+        {
+          "title": "Limit",
+          "description": "Maximum number of malevolent IP records returned per page.",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "50",
+          "tooltip": "Default is 50. Maximum allowed value is 1000 per request."
+        },
+        {
+          "title": "Since",
+          "description": "Filter results to include only IPs updated within a specified time window.",
+          "type": "text",
+          "name": "since",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify a duration such as 15m, 6h, or 3d to return IPs modified within that period."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "_links": {
+          "self": "",
+          "prev": "",
+          "next": "",
+          "first": ""
+        },
+        "items": [
+          {
+            "ip": "",
+            "reputation": "",
+            "ip_range": "",
+            "ip_range_score": "",
+            "ip_range_24": "",
+            "ip_range_24_reputation": "",
+            "ip_range_24_score": "",
+            "as_name": "",
+            "as_num": "",
+            "background_noise_score": "",
+            "background_noise": "",
+            "confidence": "",
+            "location": {
+              "country": "",
+              "city": "",
+              "latitude": "",
+              "longitude": ""
+            },
+            "reverse_dns": "",
+            "behaviors": [],
+            "references": [],
+            "history": {
+              "first_seen": "",
+              "last_seen": "",
+              "full_age": "",
+              "days_age": ""
+            },
+            "classifications": {
+              "false_positives": [],
+              "classifications": []
+            },
+            "mitre_techniques": [],
+            "cves": [],
+            "attack_details": [],
+            "target_countries": {},
+            "scores": {
+              "overall": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_day": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_week": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              },
+              "last_month": {
+                "aggressiveness": "",
+                "threat": "",
+                "trust": "",
+                "anomaly": "",
+                "total": ""
+              }
+            },
+            "state": "",
+            "expiration": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "list_blocklists",
+      "title": "List All Blocklists",
+      "description": "Retrieve all blocklists configured in the CrowdSec Service (Admin) API for the authenticated organization.",
+      "category": "investigation",
+      "annotation": "list_blocklists",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {
+        "items": [],
+        "total": "",
+        "page": "",
+        "size": "",
+        "pages": "",
+        "links": {}
+      }
+    },
+    {
+      "operation": "create_blocklist",
+      "title": "Create New Blocklist",
+      "description": "Create a new custom blocklist in the CrowdSec Service (Admin) API for organizing and enforcing threat containment policies.",
+      "category": "containment",
+      "annotation": "create_blocklist",
+      "parameters": [
+        {
+          "title": "Blocklist Name",
+          "description": "Unique name used to identify the blocklist within the CrowdSec organization.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Unique name used to identify the blocklist within the CrowdSec organization."
+        },
+        {
+          "title": "Description",
+          "description": "Optional explanation of the blocklist’s purpose and usage.",
+          "type": "textarea",
+          "name": "description",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Optional explanation of the blocklist’s purpose and usage."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "created_at": "",
+        "updated_at": "",
+        "name": "",
+        "label": "",
+        "description": "",
+        "references": [],
+        "is_private": "",
+        "tags": [],
+        "pricing_tier": "",
+        "source": "",
+        "stats": {},
+        "shared_with": [],
+        "organization_id": "",
+        "subscribers": [],
+        "categories": []
+      }
+    },
+    {
+      "operation": "update_blocklist",
+      "title": "Update Blocklist",
+      "description": "Update the metadata and CTI-driven configuration of an existing blocklist in the CrowdSec Service (Admin) API.",
+      "category": "containment",
+      "annotation": "update_blocklist",
+      "parameters": [
+        {
+          "title": "Blocklist ID",
+          "description": "Unique identifier of the blocklist that will be updated.",
+          "type": "text",
+          "name": "blocklist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the blocklist ID as returned by the List or Create Blocklist operations."
+        },
+        {
+          "title": "Label",
+          "description": "Display label shown for the blocklist in the CrowdSec console and APIs.",
+          "type": "text",
+          "name": "label",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Use a short, human-readable label describing the blocklist purpose."
+        },
+        {
+          "title": "Description",
+          "description": "Detailed explanation of the blocklist’s intent, scope, and usage.",
+          "type": "textarea",
+          "name": "description",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Updated description for the blocklist"
+        },
+        {
+          "title": "References",
+          "description": "Supporting references associated with the blocklist.",
+          "type": "textarea",
+          "name": "references",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Supporting references associated with the blocklist. Reference URLs (one per line)"
+        },
+        {
+          "title": "Tags",
+          "description": "Tags used to classify and organize the blocklist.",
+          "type": "text",
+          "name": "tags",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Tags for the blocklist (comma-separated)"
+        },
+        {
+          "title": "CTI Query",
+          "description": "Lucene query used to select IPs from CrowdSec CTI when populating the blocklist.",
+          "type": "text",
+          "name": "from_cti_query",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Use valid Lucene syntax (e.g., country:RU)"
+        },
+        {
+          "title": "Since Period",
+          "description": "Relative time window applied to the CTI query to filter IPs by recency.",
+          "type": "text",
+          "name": "since",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify a duration such as 15m, 24h, 7d, or 1m. Only IPs updated within this period are included."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "created_at": "",
+        "updated_at": "",
+        "name": "",
+        "label": "",
+        "description": "",
+        "references": [],
+        "is_private": "",
+        "tags": [],
+        "pricing_tier": "",
+        "source": "",
+        "stats": {},
+        "from_cti_query": "",
+        "since": "",
+        "shared_with": [],
+        "organization_id": "",
+        "subscribers": [],
+        "categories": []
+      }
+    },
+    {
+      "operation": "add_ips_to_blocklist",
+      "title": "Add IPs to Blocklist",
+      "description": "Add one or more IP addresses to a specific blocklist in the CrowdSec Service API. If an IP already exists in the blocklist, its expiration date will be updated.",
+      "category": "containment",
+      "annotation": "add_ips_to_blocklist",
+      "parameters": [
+        {
+          "title": "Blocklist ID",
+          "description": "Unique identifier of the blocklist to which IPs will be added.",
+          "type": "text",
+          "name": "blocklist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Provide the blocklist ID as returned from the List or Create Blocklist operations."
+        },
+        {
+          "title": "IP Addresses",
+          "description": "IP addresses to add to the blocklist.",
+          "type": "textarea",
+          "name": "ips",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter IPv4 or IPv6 addresses, either comma-separated or one per line. Example: 192.168.1.100, 10.0.0.5"
+        },
+        {
+          "title": "Expiration Date",
+          "description": "Date and time when the IP entry should expire and be automatically removed from the blocklist.",
+          "type": "text",
+          "name": "expiration",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Use ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: 2026-01-31T23:59:59Z"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "get_blocklist_ips",
+      "title": "Get Blocklist IPs",
+      "description": "Retrieve all IP addresses currently listed in a specific blocklist from the CrowdSec Service API.",
+      "category": "investigation",
+      "annotation": "get_blocklist_ips",
+      "parameters": [
+        {
+          "title": "Blocklist ID",
+          "description": "Unique identifier of the blocklist from which to fetch IP addresses.",
+          "type": "text",
+          "name": "blocklist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the blocklist ID as returned by List or Create Blocklist operations."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "blocklist_id": "",
+        "ips": []
+      }
+    },
+    {
+      "operation": "delete_ips_from_blocklist",
+      "title": "Delete IPs from Blocklist",
+      "description": "Remove one or more IP addresses from a specific blocklist in the CrowdSec Service API.",
+      "category": "containment",
+      "annotation": "delete_ips_from_blocklist",
+      "parameters": [
+        {
+          "title": "Blocklist ID",
+          "description": "Unique identifier of the blocklist from which the IPs will be removed.",
+          "type": "text",
+          "name": "blocklist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the blocklist ID as returned from List or Create Blocklist operations."
+        },
+        {
+          "title": "IP Addresses",
+          "description": "IP addresses to be removed from the blocklist.",
+          "type": "textarea",
+          "name": "ips",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Provide IPv4 or IPv6 addresses, either comma-separated or one per line. Example: 192.168.1.100, 10.0.0.5"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "bulk_overwrite_blocklist_ips",
+      "title": "Bulk Overwrite Blocklist IPs",
+      "description": "Replace all existing IP addresses in a specific blocklist with a new set of IPs. Existing entries will be fully overwritten.",
+      "category": "containment",
+      "annotation": "bulk_overwrite_blocklist_ips",
+      "parameters": [
+        {
+          "title": "Blocklist ID",
+          "description": "Unique identifier of the blocklist to be overwritten.",
+          "type": "text",
+          "name": "blocklist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the blocklist ID as returned by List or Create Blocklist operations."
+        },
+        {
+          "title": "IP Addresses",
+          "description": "New IP addresses that will replace all existing entries in the blocklist.",
+          "type": "textarea",
+          "name": "ips",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Provide IPv4 or IPv6 addresses, either comma-separated or one per line. Example: 192.168.1.100, 10.0.0.5"
+        },
+        {
+          "title": "Expiration Date",
+          "description": "Date and time when the new IP entries should expire and be automatically removed from the blocklist.",
+          "type": "text",
+          "name": "expiration",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Use ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Example: 2026-01-31T23:59:59Z"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "",
+        "message": "",
+        "accepted": ""
+      }
+    },
+    {
+      "operation": "get_blocklist",
+      "title": "Get Specific Blocklist",
+      "description": "Retrieve detailed information about a specific blocklist in the CrowdSec Service API by its ID.",
+      "category": "investigation",
+      "annotation": "get_blocklist",
+      "parameters": [
+        {
+          "title": "Blocklist ID",
+          "description": "Unique identifier of the blocklist to retrieve.",
+          "type": "text",
+          "name": "blocklist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter the blocklist ID as returned by the List or Create Blocklist operations."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "created_at": "",
+        "updated_at": "",
+        "name": "",
+        "label": "",
+        "description": "",
+        "references": [],
+        "is_private": "",
+        "tags": [],
+        "pricing_tier": "",
+        "source": "",
+        "stats": {},
+        "shared_with": [],
+        "subscribers": [],
+        "categories": []
+      }
+    },
+    {
+      "operation": "delete_blocklist",
+      "title": "Delete Blocklist",
+      "description": "Permanently delete a specific blocklist in the CrowdSec Service API by its ID. All IPs and metadata in the blocklist will be removed.",
+      "category": "containment",
+      "annotation": "delete_blocklist",
+      "parameters": [
+        {
+          "title": "Blocklist ID",
+          "description": "Specify the unique identifier of the blocklist to be deleted.",
+          "type": "text",
+          "name": "blocklist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the blocklist ID as returned by List or Create Blocklist operations."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "list_allowlists",
+      "title": "List All Allowlists",
+      "description": "Retrieve a list of all allowlists configured in the CrowdSec Service API.",
+      "category": "investigation",
+      "annotation": "list_allowlists",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {
+        "items": [],
+        "total": "",
+        "page": "",
+        "size": "",
+        "pages": "",
+        "links": {}
+      }
+    },
+    {
+      "operation": "create_allowlist",
+      "title": "Create New Allowlist",
+      "description": "Create a new custom allowlist in the CrowdSec Service API to define IPs that should be explicitly allowed or excluded from automatic blocking.",
+      "category": "remediation",
+      "annotation": "create_allowlist",
+      "parameters": [
+        {
+          "title": "Allowlist Name",
+          "description": "Specify the unique name to identify this allowlist.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify a descriptive, unique name for the allowlist."
+        },
+        {
+          "title": "Description",
+          "description": "Optional description explaining the purpose of this allowlist.",
+          "type": "textarea",
+          "name": "description",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Provide details about the allowlist purpose or intended usage."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "organization_id": "",
+        "name": "",
+        "description": "",
+        "created_at": "",
+        "total_items": ""
+      }
+    },
+    {
+      "operation": "get_allowlist_items",
+      "title": "Get Items in Allowlist",
+      "description": "Retrieve all IP addresses or entries contained in a specific allowlist from the CrowdSec Service API.",
+      "category": "investigation",
+      "annotation": "get_allowlist_items",
+      "parameters": [
+        {
+          "title": "Allowlist ID",
+          "description": "Specify the unique identifier of the allowlist whose items you want to retrieve.",
+          "type": "text",
+          "name": "allowlist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the allowlist ID as returned by List or Create Allowlist operations."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "items": [],
+        "total": "",
+        "page": "",
+        "size": "",
+        "pages": "",
+        "links": {}
+      }
+    },
+    {
+      "operation": "add_items_to_allowlist",
+      "title": "Add IPs to Allowlist",
+      "description": "Add one or more IP addresses to a specific allowlist in the CrowdSec Service API.",
+      "category": "remediation",
+      "annotation": "add_items_to_allowlist",
+      "parameters": [
+        {
+          "title": "Allowlist ID",
+          "description": "Specify the unique identifier of the allowlist to which IPs will be added.",
+          "type": "text",
+          "name": "allowlist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the allowlist ID as returned by List or Create Allowlist operations."
+        },
+        {
+          "title": "IP Addresses",
+          "description": "Specify the IP addresses to add to the allowlist.",
+          "type": "textarea",
+          "name": "items",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify IPs (comma-separated or one per line). Example: 192.168.1.100, 10.0.0.5"
+        },
+        {
+          "title": "Description",
+          "description": "Optional description for the added IPs.",
+          "type": "text",
+          "name": "description",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Provide a short description explaining the purpose of these allowlist entries."
+        },
+        {
+          "title": "Expiration Date",
+          "description": "Optional expiration date for these allowlist items.",
+          "type": "text",
+          "name": "expiration",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Set when these items should expire (ISO format: YYYY-MM-DDTHH:MM:SSZ). Leave blank for permanent entries."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "get_specific_allowlist_item",
+      "title": "Get Specific Allowlist Item",
+      "description": "Retrieve detailed information about a specific allowlist item by its ID from the CrowdSec Service API.",
+      "category": "investigation",
+      "annotation": "get_specific_allowlist_item",
+      "parameters": [
+        {
+          "title": "Allowlist ID",
+          "description": "Specify the Unique identifier of the allowlist containing the item.",
+          "type": "text",
+          "name": "allowlist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the ID of the allowlist to which the item belongs."
+        },
+        {
+          "title": "Item ID",
+          "description": "Specify the ID of the allowlist item you want to fetch.",
+          "type": "text",
+          "name": "item_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the ID of the allowlist item you want to fetch."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "allowlist_id": "",
+        "description": "",
+        "scope": "",
+        "value": "",
+        "created_at": "",
+        "updated_at": "",
+        "created_by": {
+          "source_type": "",
+          "identifier": ""
+        },
+        "updated_by": {
+          "source_type": "",
+          "identifier": ""
+        },
+        "expiration": ""
+      }
+    },
+    {
+      "operation": "update_allowlist",
+      "title": "Update Allowlist",
+      "description": "Modify the name or description of an existing allowlist in the CrowdSec Service API.",
+      "category": "remediation",
+      "annotation": "update_allowlist",
+      "parameters": [
+        {
+          "title": "Allowlist ID",
+          "description": "Specif the Unique identifier of the allowlist to update.",
+          "type": "text",
+          "name": "allowlist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the allowlist ID you want to modify."
+        },
+        {
+          "title": "Name",
+          "description": "Specify the new name for the allowlist.",
+          "type": "text",
+          "name": "name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Provide a new name for the allowlist. Leave empty to keep the current name."
+        },
+        {
+          "title": "Description",
+          "description": "Specify the new description for the allowlist",
+          "type": "text",
+          "name": "description",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Provide a new description for the allowlist. Leave empty to keep the current description."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "organization_id": "",
+        "name": "",
+        "description": "",
+        "created_at": "",
+        "updated_at": "",
+        "from_cti_query": "",
+        "since": "",
+        "total_items": 0,
+        "subscribers": []
+      }
+    },
+    {
+      "operation": "delete_allowlist_item",
+      "title": "Delete Item from Allowlist",
+      "description": "Remove a specific item from an existing allowlist in the CrowdSec Service API.",
+      "category": "remediation",
+      "annotation": "delete_allowlist_item",
+      "parameters": [
+        {
+          "title": "Allowlist ID",
+          "description": "Specify the Unique identifier of the allowlist containing the item to delete.",
+          "type": "text",
+          "name": "allowlist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the ID of the allowlist from which you want to remove an item."
+        },
+        {
+          "title": "Item ID",
+          "description": "Specify the Unique identifier of the item to remove from the allowlist.",
+          "type": "text",
+          "name": "item_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the ID of the specific allowlist item you want to delete."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "delete_allowlist",
+      "title": "Delete Allowlist",
+      "description": "Permanently delete a specific allowlist in the CrowdSec Service API by its ID.",
+      "category": "remediation",
+      "annotation": "delete_allowlist",
+      "parameters": [
+        {
+          "title": "Allowlist ID",
+          "description": "Specify the Unique identifier of the allowlist you want to delete.",
+          "type": "text",
+          "name": "allowlist_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the ID of the allowlist to remove."
+        },
+        {
+          "title": "Force Delete",
+          "description": "Whether to force deletion even if the allowlist has subscribers.",
+          "type": "text",
+          "name": "force",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Set to true to force delete an allowlist that has active subscribers."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "list_integrations",
+      "title": "List Integrations",
+      "description": "Retrieve a list of all integrations available in the CrowdSec Service API.",
+      "category": "investigation",
+      "annotation": "list_integrations",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {
+        "items": [],
+        "total": "",
+        "page": "",
+        "size": "",
+        "pages": "",
+        "links": {}
+      }
+    },
+    {
+      "operation": "create_integration",
+      "title": "Create Integration",
+      "description": "Create a new integration with a firewall or remediation system, managed by your organization.",
+      "category": "remediation",
+      "annotation": "create_integration",
+      "parameters": [
+        {
+          "title": "Name",
+          "description": "Specify a unique name for this integration within your organization.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify a unique name for this integration within your organization."
+        },
+        {
+          "title": "Description",
+          "description": "Provide a description explaining the purpose of this integration.",
+          "type": "textarea",
+          "name": "description",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Provide a description explaining the purpose of this integration."
+        },
+        {
+          "title": "Entity Type",
+          "description": "Specify the type of integration (default: firewall_integration)",
+          "type": "text",
+          "name": "entity_type",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "firewall_integration",
+          "tooltip": "Specify the type of integration (default: firewall_integration)"
+        },
+        {
+          "title": "Output Format",
+          "description": "Choose the output format for the integration (default: plain_text)",
+          "type": "text",
+          "name": "output_format",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "plain_text",
+          "tooltip": "Choose the output format for the integration (default: plain_text)"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "organization_id": "",
+        "description": "",
+        "created_at": "",
+        "updated_at": "",
+        "entity_type": "",
+        "output_format": "",
+        "last_pull": "",
+        "blocklists": [
+          {
+            "id": "",
+            "remediation": "",
+            "name": "",
+            "label": ""
+          }
+        ],
+        "endpoint": "",
+        "stats": {
+          "count": ""
+        },
+        "tags": [],
+        "credentials": {
+          "api_key": ""
+        }
+      }
+    },
+    {
+      "operation": "get_integration",
+      "title": "Get Integration",
+      "description": "Retrieve the details of a specific integration by its ID, including associated blocklists and configuration.",
+      "category": "investigation",
+      "annotation": "get_integration",
+      "parameters": [
+        {
+          "title": "Integration ID",
+          "description": "Specify the unique ID of the integration you want to retrieve",
+          "type": "text",
+          "name": "integration_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the unique ID of the integration you want to retrieve."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "organization_id": "",
+        "description": "",
+        "created_at": "",
+        "updated_at": "",
+        "entity_type": "",
+        "output_format": "",
+        "last_pull": "",
+        "blocklists": [
+          {
+            "id": "",
+            "remediation": "",
+            "name": "",
+            "label": ""
+          }
+        ],
+        "endpoint": "",
+        "stats": {
+          "count": ""
+        },
+        "tags": []
+      }
+    },
+    {
+      "operation": "update_integration",
+      "title": "Update Integration",
+      "description": "Update the details of an existing integration, including name, description, output format, and credentials.",
+      "category": "remediation",
+      "annotation": "update_integration",
+      "parameters": [
+        {
+          "title": "Integration ID",
+          "description": "Specify the unique ID of the integration you want to update",
+          "type": "text",
+          "name": "integration_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the unique ID of the integration you want to update"
+        },
+        {
+          "title": "Name",
+          "description": "New name for the integration",
+          "type": "text",
+          "name": "name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "New name for the integration."
+        },
+        {
+          "title": "Description",
+          "description": "New description for the integration",
+          "type": "textarea",
+          "name": "description",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "New description for the integration"
+        },
+        {
+          "title": "Output Format",
+          "description": "Updated output format for the integration (e.g., plain_text)",
+          "type": "text",
+          "name": "output_format",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Updated output format for the integration (e.g., plain_text)"
+        },
+        {
+          "title": "Regenerate Credentials",
+          "description": "Set to 'true' to regenerate API credentials for this integration.",
+          "type": "text",
+          "name": "regenerate_credentials",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Set to 'true' to regenerate API credentials for this integration."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "organization_id": "",
+        "description": "",
+        "created_at": "",
+        "updated_at": "",
+        "entity_type": "",
+        "output_format": "",
+        "last_pull": "",
+        "blocklists": [
+          {
+            "id": "",
+            "remediation": "",
+            "name": "",
+            "label": ""
+          }
+        ],
+        "endpoint": "",
+        "stats": {
+          "count": ""
+        },
+        "tags": [],
+        "credentials": {
+          "api_key": ""
+        }
+      }
+    },
+    {
+      "operation": "delete_integration",
+      "title": "Delete Integration",
+      "description": "Permanently delete an existing integration by its unique ID from the CrowdSec Service API.",
+      "category": "remediation",
+      "annotation": "delete_integration",
+      "parameters": [
+        {
+          "title": "Integration ID",
+          "description": "Specify the unique ID of the integration you want to delete",
+          "type": "text",
+          "name": "integration_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Specify the unique ID of the integration you want to delete"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "",
+        "message": ""
+      }
+    }
+  ]
+}

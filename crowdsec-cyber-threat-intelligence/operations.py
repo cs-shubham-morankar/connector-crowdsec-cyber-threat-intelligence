@@ -1,9 +1,16 @@
+"""
+Copyright start
+MIT License
+Copyright (c) 2026 Fortinet Inc
+Copyright end
+"""
+
 from connectors.core.connector import ConnectorError, get_logger
 import requests
 import ipaddress
 import re
 
-logger = get_logger('crowdsec')
+logger = get_logger('crowdsec-cyber-threat-intelligence')
 
 # Default URLs (fallback if not configured)
 DEFAULT_SERVICE_BASE_URL = "https://admin.api.crowdsec.net/v1"
@@ -39,7 +46,7 @@ class CrowdSecClient:
         """Check if operation requires Service API key"""
         service_operations = [
             'list_blocklists', 'create_blocklist', 'get_blocklist', 'delete_blocklist',
-            'update_blocklist','add_ips_to_blocklist', 'delete_ips_from_blocklist',
+            'update_blocklist', 'add_ips_to_blocklist', 'delete_ips_from_blocklist',
             'bulk_overwrite_blocklist_ips', 'get_blocklist_ips', 'list_allowlists', 'create_allowlist',
             'get_allowlist_items', 'add_items_to_allowlist', 'get_specific_allowlist_item',
             'update_allowlist', 'delete_allowlist_item',
@@ -216,7 +223,8 @@ def batch_get_ip_reputation(config, params):
     headers = {"x-api-key": client.cti_api_key, "Accept": "application/json"}
     params_dict = {"ips": ",".join(ips)}
 
-    return client.make_request("GET", url, headers=headers, params=params_dict, operation_name="batch_get_ip_reputation")
+    return client.make_request("GET", url, headers=headers, params=params_dict,
+                               operation_name="batch_get_ip_reputation")
 
 
 def get_malevolent_ips(config, params):

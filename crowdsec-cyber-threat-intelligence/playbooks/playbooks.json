@@ -1,0 +1,1865 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "19d6e51c-09e1-4adb-b495-f639f918b6e1",
+      "@type": "WorkflowCollection",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "cfdc1f56-14e7-495c-b0b1-a15ad163eb1a",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "ca5aa46f-fbc1-492c-9c50-a7fe26e8dc6d",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "4117da24-15a3-496a-9558-7f2916a67268",
+              "@type": "WorkflowStep",
+              "name": "Get IP Reputation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "ip_address": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "get_ip_reputation",
+                "operationTitle": "Get IP Reputation"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve detailed threat intelligence, reputation scoring, and behavioral context for a given IP address using the CrowdSec CTI API.",
+          "name": "Get IP Reputation",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ca5aa46f-fbc1-492c-9c50-a7fe26e8dc6d",
+          "routes": [
+            {
+              "uuid": "6706f105-f982-45b9-afb4-4e21d5c4092a",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get IP Reputation",
+              "sourceStep": "/api/3/workflow_steps/ca5aa46f-fbc1-492c-9c50-a7fe26e8dc6d",
+              "targetStep": "/api/3/workflow_steps/4117da24-15a3-496a-9558-7f2916a67268"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "c2aab805-5bb7-4b7b-a343-1c6557496749",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "cbb96261-9447-4007-a78c-d6fda837d7c5",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "a1ceae2a-e994-4b35-ab34-fb7089304041",
+              "@type": "WorkflowStep",
+              "name": "Search IP Reputation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "query": "",
+                  "since": "",
+                  "page": "",
+                  "limit": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "search_ip_reputation",
+                "operationTitle": "Search IP Reputation"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Search CrowdSec Cyber Threat Intelligence for IP addresses matching a Lucene query, with optional time filtering and pagination.",
+          "name": "Search IP Reputation",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/cbb96261-9447-4007-a78c-d6fda837d7c5",
+          "routes": [
+            {
+              "uuid": "ebb8f626-9081-477b-9ca3-1f3c350ed920",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Search IP Reputation",
+              "sourceStep": "/api/3/workflow_steps/cbb96261-9447-4007-a78c-d6fda837d7c5",
+              "targetStep": "/api/3/workflow_steps/a1ceae2a-e994-4b35-ab34-fb7089304041"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1e779b5b-2387-4b4b-ad8e-6ad1a55b2bc3",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "0258387d-1450-4a0e-8628-34b30e07d96f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "09dc0e82-6460-414d-a064-de10b8588721",
+              "@type": "WorkflowStep",
+              "name": "Batch Get IP Reputation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "ips": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "batch_get_ip_reputation",
+                "operationTitle": "Batch Get IP Reputation"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve threat intelligence and reputation data for multiple IP addresses in a single request using the CrowdSec CTI API.",
+          "name": "Batch Get IP Reputation",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0258387d-1450-4a0e-8628-34b30e07d96f",
+          "routes": [
+            {
+              "uuid": "4c8642cb-417b-494d-aa00-9d53af828051",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Batch Get IP Reputation",
+              "sourceStep": "/api/3/workflow_steps/0258387d-1450-4a0e-8628-34b30e07d96f",
+              "targetStep": "/api/3/workflow_steps/09dc0e82-6460-414d-a064-de10b8588721"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f7326334-04f4-4855-b307-5869e93ae2c8",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "ff9a865e-12c8-4bb6-9ee7-d9b3466b2154",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "7801a688-1af7-4f00-bea7-6e8ef8693930",
+              "@type": "WorkflowStep",
+              "name": "Get Fire IPs",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "page": "1",
+                  "limit": "50",
+                  "since": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "get_malevolent_ips",
+                "operationTitle": "Get Fire IPs"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve a paginated list of malevolent IP addresses from the CrowdSec CTI API, with optional filtering based on last modification time.",
+          "name": "Get Fire IPs",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ff9a865e-12c8-4bb6-9ee7-d9b3466b2154",
+          "routes": [
+            {
+              "uuid": "6fa4c434-6588-4607-a334-1d5eca7ff923",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Fire IPs",
+              "sourceStep": "/api/3/workflow_steps/ff9a865e-12c8-4bb6-9ee7-d9b3466b2154",
+              "targetStep": "/api/3/workflow_steps/7801a688-1af7-4f00-bea7-6e8ef8693930"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f6e16cb3-c553-4e86-a210-b436499124f5",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "d6b43049-ce26-4733-8389-daf2ded0c301",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "8077d68b-5e2a-4fd9-8349-19b6ad8dc2ba",
+              "@type": "WorkflowStep",
+              "name": "List All Blocklists",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "list_blocklists",
+                "operationTitle": "List All Blocklists"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve all blocklists configured in the CrowdSec Service (Admin) API for the authenticated organization.",
+          "name": "List All Blocklists",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d6b43049-ce26-4733-8389-daf2ded0c301",
+          "routes": [
+            {
+              "uuid": "f11ad111-8af6-4dda-86bd-ab34f66a39eb",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List All Blocklists",
+              "sourceStep": "/api/3/workflow_steps/d6b43049-ce26-4733-8389-daf2ded0c301",
+              "targetStep": "/api/3/workflow_steps/8077d68b-5e2a-4fd9-8349-19b6ad8dc2ba"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "eb70f269-3ede-4433-a977-4ac5ab9bc85b",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "c42a0f6d-6eb1-4f71-a449-a4f5383f42e2",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "0f4ca3d7-1e67-4499-aa88-06ec387cc4fe",
+              "@type": "WorkflowStep",
+              "name": "Create New Blocklist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "name": "",
+                  "description": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "create_blocklist",
+                "operationTitle": "Create New Blocklist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Create a new custom blocklist in the CrowdSec Service (Admin) API for organizing and enforcing threat containment policies.",
+          "name": "Create New Blocklist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c42a0f6d-6eb1-4f71-a449-a4f5383f42e2",
+          "routes": [
+            {
+              "uuid": "c782593c-e768-4120-bb9c-217f4524f3ce",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create New Blocklist",
+              "sourceStep": "/api/3/workflow_steps/c42a0f6d-6eb1-4f71-a449-a4f5383f42e2",
+              "targetStep": "/api/3/workflow_steps/0f4ca3d7-1e67-4499-aa88-06ec387cc4fe"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "4b8cfaab-d174-4678-a728-c01afbf532b1",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "66a7436c-a08b-45aa-96a7-4b2edbcb0595",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "bbf120bb-6f9e-48d8-b526-dcba91515fbc",
+              "@type": "WorkflowStep",
+              "name": "Update Blocklist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "blocklist_id": "",
+                  "label": "",
+                  "description": "",
+                  "references": "",
+                  "tags": "",
+                  "from_cti_query": "",
+                  "since": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "update_blocklist",
+                "operationTitle": "Update Blocklist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Update the metadata and CTI-driven configuration of an existing blocklist in the CrowdSec Service (Admin) API.",
+          "name": "Update Blocklist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/66a7436c-a08b-45aa-96a7-4b2edbcb0595",
+          "routes": [
+            {
+              "uuid": "fc7fe03b-601c-44a5-bcf7-8194b0835d49",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update Blocklist",
+              "sourceStep": "/api/3/workflow_steps/66a7436c-a08b-45aa-96a7-4b2edbcb0595",
+              "targetStep": "/api/3/workflow_steps/bbf120bb-6f9e-48d8-b526-dcba91515fbc"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "928d6f98-bde5-4d86-bda2-2645ec349509",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "098868bb-72d2-4ce2-88e7-410d255c007e",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "1207e5e6-8429-474d-b90c-ca3eecec84c3",
+              "@type": "WorkflowStep",
+              "name": "Add IPs to Blocklist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "blocklist_id": "",
+                  "ips": "",
+                  "expiration": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "add_ips_to_blocklist",
+                "operationTitle": "Add IPs to Blocklist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Add one or more IP addresses to a specific blocklist in the CrowdSec Service API. If an IP already exists in the blocklist, its expiration date will be updated.",
+          "name": "Add IPs to Blocklist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/098868bb-72d2-4ce2-88e7-410d255c007e",
+          "routes": [
+            {
+              "uuid": "61c8cc81-941b-466c-a75f-c6086ddc7bfa",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Add IPs to Blocklist",
+              "sourceStep": "/api/3/workflow_steps/098868bb-72d2-4ce2-88e7-410d255c007e",
+              "targetStep": "/api/3/workflow_steps/1207e5e6-8429-474d-b90c-ca3eecec84c3"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "220ce9be-1957-4f30-81be-6df861769b93",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "d5db3fb8-85bb-43e8-9687-1e35addf88b2",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "02001fb1-16a7-4c4b-a1dc-a374ca411d77",
+              "@type": "WorkflowStep",
+              "name": "Get Blocklist IPs",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "blocklist_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "get_blocklist_ips",
+                "operationTitle": "Get Blocklist IPs"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve all IP addresses currently listed in a specific blocklist from the CrowdSec Service API.",
+          "name": "Get Blocklist IPs",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d5db3fb8-85bb-43e8-9687-1e35addf88b2",
+          "routes": [
+            {
+              "uuid": "8b82b013-65d8-4f88-b26e-e49da684b2e6",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Blocklist IPs",
+              "sourceStep": "/api/3/workflow_steps/d5db3fb8-85bb-43e8-9687-1e35addf88b2",
+              "targetStep": "/api/3/workflow_steps/02001fb1-16a7-4c4b-a1dc-a374ca411d77"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "924e87eb-eb75-4ad6-a677-d510ee57097b",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "b95177a0-c456-429a-ba89-49a5bf1782df",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "c95616bc-45b8-40fd-88ca-41273e2231ea",
+              "@type": "WorkflowStep",
+              "name": "Delete IPs from Blocklist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "blocklist_id": "",
+                  "ips": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "delete_ips_from_blocklist",
+                "operationTitle": "Delete IPs from Blocklist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Remove one or more IP addresses from a specific blocklist in the CrowdSec Service API.",
+          "name": "Delete IPs from Blocklist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/b95177a0-c456-429a-ba89-49a5bf1782df",
+          "routes": [
+            {
+              "uuid": "1eda1c88-8d62-4e31-8208-bcf0d5f34b48",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete IPs from Blocklist",
+              "sourceStep": "/api/3/workflow_steps/b95177a0-c456-429a-ba89-49a5bf1782df",
+              "targetStep": "/api/3/workflow_steps/c95616bc-45b8-40fd-88ca-41273e2231ea"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "9ebe5e8a-0a9d-429a-afa7-f747885420eb",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "4b13d426-51ee-448d-8549-fed70ed32847",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "e18825e0-5139-42d4-ade0-8a1cae74fe53",
+              "@type": "WorkflowStep",
+              "name": "Bulk Overwrite Blocklist IPs",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "blocklist_id": "",
+                  "ips": "",
+                  "expiration": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "bulk_overwrite_blocklist_ips",
+                "operationTitle": "Bulk Overwrite Blocklist IPs"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Replace all existing IP addresses in a specific blocklist with a new set of IPs. Existing entries will be fully overwritten.",
+          "name": "Bulk Overwrite Blocklist IPs",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/4b13d426-51ee-448d-8549-fed70ed32847",
+          "routes": [
+            {
+              "uuid": "10ea89bc-00d8-420f-9f5e-61a4923bf731",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Bulk Overwrite Blocklist IPs",
+              "sourceStep": "/api/3/workflow_steps/4b13d426-51ee-448d-8549-fed70ed32847",
+              "targetStep": "/api/3/workflow_steps/e18825e0-5139-42d4-ade0-8a1cae74fe53"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "cee164ed-c44b-4e2e-9561-3744bc9eb46a",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "7db45d3c-f0a7-4900-be37-c570460a34cb",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "b98cf61e-6f95-4191-afc9-9b4c31952421",
+              "@type": "WorkflowStep",
+              "name": "Get Specific Blocklist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "blocklist_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "get_blocklist",
+                "operationTitle": "Get Specific Blocklist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve detailed information about a specific blocklist in the CrowdSec Service API by its ID.",
+          "name": "Get Specific Blocklist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/7db45d3c-f0a7-4900-be37-c570460a34cb",
+          "routes": [
+            {
+              "uuid": "b55b73c0-5541-4566-b4b7-fe4e7669d4ff",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Specific Blocklist",
+              "sourceStep": "/api/3/workflow_steps/7db45d3c-f0a7-4900-be37-c570460a34cb",
+              "targetStep": "/api/3/workflow_steps/b98cf61e-6f95-4191-afc9-9b4c31952421"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "9755edec-bf9b-40ff-b490-e3d9db2bca22",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "1f5ef771-4c48-4d32-8237-bfcb0018b120",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "39eadaf1-fcc5-48f7-b489-307b5d597008",
+              "@type": "WorkflowStep",
+              "name": "Delete Blocklist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "blocklist_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "delete_blocklist",
+                "operationTitle": "Delete Blocklist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Permanently delete a specific blocklist in the CrowdSec Service API by its ID. All IPs and metadata in the blocklist will be removed.",
+          "name": "Delete Blocklist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1f5ef771-4c48-4d32-8237-bfcb0018b120",
+          "routes": [
+            {
+              "uuid": "7bc71b3d-6aaa-4c5c-b74c-e008a0eda371",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Blocklist",
+              "sourceStep": "/api/3/workflow_steps/1f5ef771-4c48-4d32-8237-bfcb0018b120",
+              "targetStep": "/api/3/workflow_steps/39eadaf1-fcc5-48f7-b489-307b5d597008"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "8b86716a-9529-441c-bcfd-a5f2aebacf78",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "1596594c-5620-4715-bc87-78b39e80da5f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "3f2b9e34-5c3c-4493-b20f-d88c0991c04c",
+              "@type": "WorkflowStep",
+              "name": "List All Allowlists",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "list_allowlists",
+                "operationTitle": "List All Allowlists"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve a list of all allowlists configured in the CrowdSec Service API.",
+          "name": "List All Allowlists",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1596594c-5620-4715-bc87-78b39e80da5f",
+          "routes": [
+            {
+              "uuid": "5e25e7ec-a3eb-43e6-8f69-3e0d545a8142",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List All Allowlists",
+              "sourceStep": "/api/3/workflow_steps/1596594c-5620-4715-bc87-78b39e80da5f",
+              "targetStep": "/api/3/workflow_steps/3f2b9e34-5c3c-4493-b20f-d88c0991c04c"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "de2e0d77-015b-41b8-abf3-525f2f9d62f1",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "5e72d45a-ce8a-4b0a-af83-ee256db1b0da",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "c56847da-1c16-4be5-ada7-34b800ef5339",
+              "@type": "WorkflowStep",
+              "name": "Create New Allowlist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "name": "",
+                  "description": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "create_allowlist",
+                "operationTitle": "Create New Allowlist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Create a new custom allowlist in the CrowdSec Service API to define IPs that should be explicitly allowed or excluded from automatic blocking.",
+          "name": "Create New Allowlist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/5e72d45a-ce8a-4b0a-af83-ee256db1b0da",
+          "routes": [
+            {
+              "uuid": "69aaf833-bb4f-475e-9ae8-13ffca534b37",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create New Allowlist",
+              "sourceStep": "/api/3/workflow_steps/5e72d45a-ce8a-4b0a-af83-ee256db1b0da",
+              "targetStep": "/api/3/workflow_steps/c56847da-1c16-4be5-ada7-34b800ef5339"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "a639d0be-eedf-4290-82b8-c5cc099700ed",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "d12d172b-d1cf-4190-8b7f-7423eb8a8c2e",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "9797944b-a051-4b6c-8d21-8f669b2a1b98",
+              "@type": "WorkflowStep",
+              "name": "Get Items in Allowlist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "allowlist_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "get_allowlist_items",
+                "operationTitle": "Get Items in Allowlist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve all IP addresses or entries contained in a specific allowlist from the CrowdSec Service API.",
+          "name": "Get Items in Allowlist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d12d172b-d1cf-4190-8b7f-7423eb8a8c2e",
+          "routes": [
+            {
+              "uuid": "ebedbc3f-811f-4683-962c-3510b4708bcd",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Items in Allowlist",
+              "sourceStep": "/api/3/workflow_steps/d12d172b-d1cf-4190-8b7f-7423eb8a8c2e",
+              "targetStep": "/api/3/workflow_steps/9797944b-a051-4b6c-8d21-8f669b2a1b98"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "3611222e-798b-4419-a9b6-c9a95863dcbe",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "4c50f202-13e7-4cd1-8fcf-56d0bb0bfc01",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "9a278711-83af-4b82-8e22-5bdd98b8e096",
+              "@type": "WorkflowStep",
+              "name": "Add IPs to Allowlist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "allowlist_id": "",
+                  "items": "",
+                  "description": "",
+                  "expiration": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "add_items_to_allowlist",
+                "operationTitle": "Add IPs to Allowlist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Add one or more IP addresses to a specific allowlist in the CrowdSec Service API.",
+          "name": "Add IPs to Allowlist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/4c50f202-13e7-4cd1-8fcf-56d0bb0bfc01",
+          "routes": [
+            {
+              "uuid": "c43fbd2c-d291-480b-a7a2-7f3cfe6b189d",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Add IPs to Allowlist",
+              "sourceStep": "/api/3/workflow_steps/4c50f202-13e7-4cd1-8fcf-56d0bb0bfc01",
+              "targetStep": "/api/3/workflow_steps/9a278711-83af-4b82-8e22-5bdd98b8e096"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "3c4730a5-b5f5-4bef-bb4c-baf2132f9c0c",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "75dba0f6-34a7-4ba2-bfb8-eaa737c5c034",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "504e8330-b62d-4a76-8246-f2b11d953bea",
+              "@type": "WorkflowStep",
+              "name": "Get Specific Allowlist Item",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "allowlist_id": "",
+                  "item_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "get_specific_allowlist_item",
+                "operationTitle": "Get Specific Allowlist Item"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve detailed information about a specific allowlist item by its ID from the CrowdSec Service API.",
+          "name": "Get Specific Allowlist Item",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/75dba0f6-34a7-4ba2-bfb8-eaa737c5c034",
+          "routes": [
+            {
+              "uuid": "2d2ef964-ef07-4e4f-93ac-3fcb51f19b8e",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Specific Allowlist Item",
+              "sourceStep": "/api/3/workflow_steps/75dba0f6-34a7-4ba2-bfb8-eaa737c5c034",
+              "targetStep": "/api/3/workflow_steps/504e8330-b62d-4a76-8246-f2b11d953bea"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "01ce377f-eb43-4f2c-9bbd-545febc819a1",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "a06cc8ef-399d-437b-9ffb-f82138b29efc",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "bb7e1b9c-7699-49c6-a43e-9562c9214eaf",
+              "@type": "WorkflowStep",
+              "name": "Update Allowlist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "allowlist_id": "",
+                  "name": "",
+                  "description": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "update_allowlist",
+                "operationTitle": "Update Allowlist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Modify the name or description of an existing allowlist in the CrowdSec Service API.",
+          "name": "Update Allowlist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a06cc8ef-399d-437b-9ffb-f82138b29efc",
+          "routes": [
+            {
+              "uuid": "f2d64727-604d-47cc-a326-726d2e459f94",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update Allowlist",
+              "sourceStep": "/api/3/workflow_steps/a06cc8ef-399d-437b-9ffb-f82138b29efc",
+              "targetStep": "/api/3/workflow_steps/bb7e1b9c-7699-49c6-a43e-9562c9214eaf"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "7cd2125c-ad96-41a9-aced-5200cc3a9fac",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "0f55b0a1-2a46-415b-b160-4874be30a39e",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "d586c2ec-c8ac-421f-9e1a-e0ee27790850",
+              "@type": "WorkflowStep",
+              "name": "Delete Item from Allowlist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "allowlist_id": "",
+                  "item_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "delete_allowlist_item",
+                "operationTitle": "Delete Item from Allowlist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Remove a specific item from an existing allowlist in the CrowdSec Service API.",
+          "name": "Delete Item from Allowlist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0f55b0a1-2a46-415b-b160-4874be30a39e",
+          "routes": [
+            {
+              "uuid": "f700b7b3-21f7-4615-8c13-b824d8a3121f",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Item from Allowlist",
+              "sourceStep": "/api/3/workflow_steps/0f55b0a1-2a46-415b-b160-4874be30a39e",
+              "targetStep": "/api/3/workflow_steps/d586c2ec-c8ac-421f-9e1a-e0ee27790850"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "fa0e4fda-6dec-4db9-a5fd-c3c73a2a963f",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "bd4a4631-ce61-4c12-9705-ec8b648ed545",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "daef6a41-85c2-41e3-b86f-be6c17a4a865",
+              "@type": "WorkflowStep",
+              "name": "Delete Allowlist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "allowlist_id": "",
+                  "force": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "delete_allowlist",
+                "operationTitle": "Delete Allowlist"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Permanently delete a specific allowlist in the CrowdSec Service API by its ID.",
+          "name": "Delete Allowlist",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/bd4a4631-ce61-4c12-9705-ec8b648ed545",
+          "routes": [
+            {
+              "uuid": "e56eff5d-42d0-428f-9c70-f43e0f70ff04",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Allowlist",
+              "sourceStep": "/api/3/workflow_steps/bd4a4631-ce61-4c12-9705-ec8b648ed545",
+              "targetStep": "/api/3/workflow_steps/daef6a41-85c2-41e3-b86f-be6c17a4a865"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "99c6943a-3d6a-4b82-a29b-516b8a20127b",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "a90f9ae6-3602-4d99-a8aa-10ab13aeff0b",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "1945dd33-2a08-4901-9922-5dfc2fc1be92",
+              "@type": "WorkflowStep",
+              "name": "List Integrations",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "list_integrations",
+                "operationTitle": "List Integrations"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve a list of all integrations available in the CrowdSec Service API.",
+          "name": "List Integrations",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a90f9ae6-3602-4d99-a8aa-10ab13aeff0b",
+          "routes": [
+            {
+              "uuid": "851095fc-d225-40ec-8446-7d97503b0013",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List Integrations",
+              "sourceStep": "/api/3/workflow_steps/a90f9ae6-3602-4d99-a8aa-10ab13aeff0b",
+              "targetStep": "/api/3/workflow_steps/1945dd33-2a08-4901-9922-5dfc2fc1be92"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "6fe5b323-641a-4e32-873d-a469ef64001c",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "b6825d97-0262-40df-96ac-b2d896dc17f7",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "69df081a-0596-44ca-8bd7-d817f625f04e",
+              "@type": "WorkflowStep",
+              "name": "Create Integration",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "name": "",
+                  "description": "",
+                  "entity_type": "firewall_integration",
+                  "output_format": "plain_text"
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "create_integration",
+                "operationTitle": "Create Integration"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Create a new integration with a firewall or remediation system, managed by your organization.",
+          "name": "Create Integration",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/b6825d97-0262-40df-96ac-b2d896dc17f7",
+          "routes": [
+            {
+              "uuid": "f317e67e-355a-4912-978c-8d5250a51ac2",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Integration",
+              "sourceStep": "/api/3/workflow_steps/b6825d97-0262-40df-96ac-b2d896dc17f7",
+              "targetStep": "/api/3/workflow_steps/69df081a-0596-44ca-8bd7-d817f625f04e"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "5174b153-2878-44b1-a9a4-d7383e98d088",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "666a62aa-b576-4d76-a1b0-c9664fec7727",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "808270db-486e-43a1-b32d-2794cf045c01",
+              "@type": "WorkflowStep",
+              "name": "Get Integration",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "integration_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "get_integration",
+                "operationTitle": "Get Integration"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve the details of a specific integration by its ID, including associated blocklists and configuration.",
+          "name": "Get Integration",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/666a62aa-b576-4d76-a1b0-c9664fec7727",
+          "routes": [
+            {
+              "uuid": "4bdab64f-4b3b-49e9-8ea6-2dbf22ade055",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Integration",
+              "sourceStep": "/api/3/workflow_steps/666a62aa-b576-4d76-a1b0-c9664fec7727",
+              "targetStep": "/api/3/workflow_steps/808270db-486e-43a1-b32d-2794cf045c01"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "e7da1fac-bd95-464b-a3a5-90806507748b",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "529720bc-c358-4c9c-9896-aa1232bc5051",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "d5e04455-4f69-4976-8082-15b6dabefcc4",
+              "@type": "WorkflowStep",
+              "name": "Update Integration",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "integration_id": "",
+                  "name": "",
+                  "description": "",
+                  "output_format": "",
+                  "regenerate_credentials": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "update_integration",
+                "operationTitle": "Update Integration"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Update the details of an existing integration, including name, description, output format, and credentials.",
+          "name": "Update Integration",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/529720bc-c358-4c9c-9896-aa1232bc5051",
+          "routes": [
+            {
+              "uuid": "ed982d55-6f59-4845-8ccc-9ce88d730924",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update Integration",
+              "sourceStep": "/api/3/workflow_steps/529720bc-c358-4c9c-9896-aa1232bc5051",
+              "targetStep": "/api/3/workflow_steps/d5e04455-4f69-4976-8082-15b6dabefcc4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "a8db1c8e-305a-4cb8-b04a-76599f7cb97f",
+          "collection": "/api/3/workflow_collections/19d6e51c-09e1-4adb-b495-f639f918b6e1",
+          "steps": [
+            {
+              "uuid": "02a96a62-54b9-42d4-9a81-ad82d63dca98",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "19b8076d-8bde-49dd-b16a-36a7dbb21f5a",
+              "@type": "WorkflowStep",
+              "name": "Delete Integration",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "CrowdSec Cyber Threat Intelligence",
+                "config": "",
+                "params": {
+                  "integration_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "crowdsec-cyber-threat-intelligence",
+                "operation": "delete_integration",
+                "operationTitle": "Delete Integration"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Permanently delete an existing integration by its unique ID from the CrowdSec Service API.",
+          "name": "Delete Integration",
+          "tag": "#CrowdSec Cyber Threat Intelligence",
+          "recordTags": [
+            "Crowdsec",
+            "crowdsec-cyber-threat-intelligence"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/02a96a62-54b9-42d4-9a81-ad82d63dca98",
+          "routes": [
+            {
+              "uuid": "02ce276d-0d46-4a60-9d7d-5918413db28c",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Integration",
+              "sourceStep": "/api/3/workflow_steps/02a96a62-54b9-42d4-9a81-ad82d63dca98",
+              "targetStep": "/api/3/workflow_steps/19b8076d-8bde-49dd-b16a-36a7dbb21f5a"
+            }
+          ]
+        }
+      ],
+      "name": "Sample - CrowdSec Cyber Threat Intelligence - 1.0.0",
+      "description": "CrowdSec Cyber Threat Intelligence & Service APIs provide a unified, real-time threat intelligence and automation platform that enables organizations to detect, enrich, and respond to cyber threats at scale.",
+      "visible": true,
+      "recordTags": [
+        "Crowdsec",
+        "crowdsec-cyber-threat-intelligence"
+      ]
+    }
+  ]
+}
