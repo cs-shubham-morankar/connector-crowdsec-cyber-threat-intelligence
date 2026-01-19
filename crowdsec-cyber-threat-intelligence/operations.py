@@ -86,16 +86,22 @@ class CrowdSecClient:
                 return {"status": "accepted", "message": "Request accepted, processing in background"}
             elif response.status_code == 400:
                 error_msg = self._extract_error_message(response)
+                logger.error(f"Request failed | Status: {response.status_code} | Response: {response.text}")
                 raise ConnectorError(f"Bad Request: {error_msg}")
             elif response.status_code == 401:
+                logger.error(f"Request failed | Status: {response.status_code} | Response: {response.text}")
                 raise ConnectorError("Authentication failed - check API key")
             elif response.status_code == 403:
+                logger.error(f"Request failed | Status: {response.status_code} | Response: {response.text}")
                 raise ConnectorError("Access forbidden - insufficient permissions")
             elif response.status_code == 404:
+                logger.error(f"Request failed | Status: {response.status_code} | Response: {response.text}")
                 raise ConnectorError("Resource not found")
             elif response.status_code == 429:
+                logger.error(f"Request failed | Status: {response.status_code} | Response: {response.text}")
                 raise ConnectorError("Rate limit exceeded - please try again later")
             elif response.status_code >= 500:
+                logger.error(f"Request failed | Status: {response.status_code} | Response: {response.text}")
                 raise ConnectorError(f"Server error: {response.status_code}")
             else:
                 error_msg = self._extract_error_message(response)
