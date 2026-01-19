@@ -16,7 +16,9 @@ Certified: No
 
 ## Installing the connector
 
-<p>Use the <strong>Connector Store</strong> to install the connector. For the detailed procedure to install a connector, click <a href="https://docs.fortinet.com/document/fortisoar/0.0.0/installing-a-connector/1/installing-a-connector" target="_top">here</a>.<br>You can also use the following <code>yum</code> user to install connectors from an SSH session:</p>
+Use the **Connector Store** to install the connector. For the detailed procedure to install a connector, click <a href="https://docs.fortinet.com/document/fortisoar/0.0.0/installing-a-connector/1/installing-a-connector" target="_top">here</a>.
+
+You can also use the following `yum` command to install connectors from an SSH session:
 
 ```
 sudo yum install cyops-connector-crowdsec-cyber-threat-intelligence
@@ -25,9 +27,9 @@ sudo yum install cyops-connector-crowdsec-cyber-threat-intelligence
 ## Prerequisites to configuring the connector
 
 - You must have the URL of CrowdSec Cyber Threat Intelligence server to which you will connect and perform automated
-  operations and credentials to access that server.
+operations and credentials to access that server.
 - The FortiSOAR&trade; server should have outbound connectivity to port 443 on the CrowdSec Cyber Threat Intelligence
-  server.
+server.
 
 ## Minimum Permissions Required
 
@@ -40,52 +42,56 @@ click [here](https://docs.fortinet.com/document/fortisoar/0.0.0/configuring-a-co
 
 ### Configuration parameters
 
-<p>In FortiSOAR&trade;, on the Connectors page, click the <strong>CrowdSec Cyber Threat Intelligence</strong> connector row (if you are in the <strong>Grid</strong> view on the Connectors page) and in the <strong>Configurations&nbsp;</strong> tab enter the required configuration details:&nbsp;</p>
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>CTI Base URL<br></td><td>Specify the base endpoint for the CrowdSec Cyber Threat Intelligence (CTI) API. All CTI requests (IP reputation, enrichment, behaviors) are sent to this URL.<br>
-<tr><td>CTI API Key<br></td><td>Specify the API key used to authenticate requests to the CrowdSec CTI API. This key identifies your organization and grants access to threat intelligence data.<br>
-<tr><td>Service API Base URL<br></td><td>Specify the base endpoint for the CrowdSec Service (Admin) API. Used for managing services such as blocklists, decisions, or organization-level operations.<br>
-<tr><td>Service API Key<br></td><td>Specify the API key used to authenticate requests to the CrowdSec Service (Admin) API. Grants permission to manage resources such as blocklists and decisions.<br>
-<tr><td>Verify SSL<br></td><td>Specifies whether the SSL certificate for the server is to be verified or not. <br/>By default, this option is set as True.<br></td></tr>
-</tbody></table>
+In FortiSOAR&trade;, on the Connectors page, click the **CrowdSec Cyber Threat Intelligence** connector row (if you are in the **Grid** view on the Connectors page) and in the **Configurations&nbsp;** tab enter the required configuration details:
+
+| Parameter            | Description                                                                                                                                                     |
+|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CTI Base URL         | Specify the base endpoint for the CrowdSec Cyber Threat Intelligence (CTI) API. All CTI requests (IP reputation, enrichment, behaviors) are sent to this URL.   |
+| CTI API Key          | Specify the API key used to authenticate requests to the CrowdSec CTI API. This key identifies your organization and grants access to threat intelligence data. |
+| Service API Base URL | Specify the base endpoint for the CrowdSec Service (Admin) API. Used for managing services such as blocklists, decisions, or organization-level operations.     |
+| Service API Key      | Specify the API key used to authenticate requests to the CrowdSec Service (Admin) API. Grants permission to manage resources such as blocklists and decisions.  |
+| Verify SSL           | Specifies whether the SSL certificate for the server is to be verified or not. <br />By default, this option is set as True.                                    |
 
 ## Actions supported by the connector
 
-The following automated operations can be included in playbooks and you can also use the annotations to access
-operations:
-<table border=1><thead><tr><th>Function<br></th><th>Description<br></th><th>Annotation and Category<br></th></tr></thead><tbody><tr><td>Get IP Reputation<br></td><td>Retrieve detailed threat intelligence, reputation scoring, and behavioral context for a given IP address using the CrowdSec CTI API.<br></td><td>get_ip_reputation <br/>Investigation<br></td></tr>
-<tr><td>Search IP Reputation<br></td><td>Search CrowdSec Cyber Threat Intelligence for IP addresses matching a Lucene query, with optional time filtering and pagination.<br></td><td>search_ip_reputation <br/>Investigation<br></td></tr>
-<tr><td>Batch Get IP Reputation<br></td><td>Retrieve threat intelligence and reputation data for multiple IP addresses in a single request using the CrowdSec CTI API.<br></td><td>batch_get_ip_reputation <br/>Investigation<br></td></tr>
-<tr><td>Get Fire IPs<br></td><td>Retrieve a paginated list of malevolent IP addresses from the CrowdSec CTI API, with optional filtering based on last modification time.<br></td><td>get_malevolent_ips <br/>Investigation<br></td></tr>
-<tr><td>List All Blocklists<br></td><td>Retrieve all blocklists configured in the CrowdSec Service (Admin) API for the authenticated organization.<br></td><td>list_blocklists <br/>Investigation<br></td></tr>
-<tr><td>Create New Blocklist<br></td><td>Create a new custom blocklist in the CrowdSec Service (Admin) API for organizing and enforcing threat containment policies.<br></td><td>create_blocklist <br/>Containment<br></td></tr>
-<tr><td>Update Blocklist<br></td><td>Update the metadata and CTI-driven configuration of an existing blocklist in the CrowdSec Service (Admin) API.<br></td><td>update_blocklist <br/>Containment<br></td></tr>
-<tr><td>Add IPs to Blocklist<br></td><td>Add one or more IP addresses to a specific blocklist in the CrowdSec Service API. If an IP already exists in the blocklist, its expiration date will be updated.<br></td><td>add_ips_to_blocklist <br/>Containment<br></td></tr>
-<tr><td>Get Blocklist IPs<br></td><td>Retrieve all IP addresses currently listed in a specific blocklist from the CrowdSec Service API.<br></td><td>get_blocklist_ips <br/>Investigation<br></td></tr>
-<tr><td>Delete IPs from Blocklist<br></td><td>Remove one or more IP addresses from a specific blocklist in the CrowdSec Service API.<br></td><td>delete_ips_from_blocklist <br/>Containment<br></td></tr>
-<tr><td>Bulk Overwrite Blocklist IPs<br></td><td>Replace all existing IP addresses in a specific blocklist with a new set of IPs. Existing entries will be fully overwritten.<br></td><td>bulk_overwrite_blocklist_ips <br/>Containment<br></td></tr>
-<tr><td>Get Specific Blocklist<br></td><td>Retrieve detailed information about a specific blocklist in the CrowdSec Service API by its ID.<br></td><td>get_blocklist <br/>Investigation<br></td></tr>
-<tr><td>Delete Blocklist<br></td><td>Permanently delete a specific blocklist in the CrowdSec Service API by its ID. All IPs and metadata in the blocklist will be removed.<br></td><td>delete_blocklist <br/>Containment<br></td></tr>
-<tr><td>List All Allowlists<br></td><td>Retrieve a list of all allowlists configured in the CrowdSec Service API.<br></td><td>list_allowlists <br/>Investigation<br></td></tr>
-<tr><td>Create New Allowlist<br></td><td>Create a new custom allowlist in the CrowdSec Service API to define IPs that should be explicitly allowed or excluded from automatic blocking.<br></td><td>create_allowlist <br/>Remediation<br></td></tr>
-<tr><td>Get Items in Allowlist<br></td><td>Retrieve all IP addresses or entries contained in a specific allowlist from the CrowdSec Service API.<br></td><td>get_allowlist_items <br/>Investigation<br></td></tr>
-<tr><td>Add IPs to Allowlist<br></td><td>Add one or more IP addresses to a specific allowlist in the CrowdSec Service API.<br></td><td>add_items_to_allowlist <br/>Remediation<br></td></tr>
-<tr><td>Get Specific Allowlist Item<br></td><td>Retrieve detailed information about a specific allowlist item by its ID from the CrowdSec Service API.<br></td><td>get_specific_allowlist_item <br/>Investigation<br></td></tr>
-<tr><td>Update Allowlist<br></td><td>Modify the name or description of an existing allowlist in the CrowdSec Service API.<br></td><td>update_allowlist <br/>Remediation<br></td></tr>
-<tr><td>Delete Item from Allowlist<br></td><td>Remove a specific item from an existing allowlist in the CrowdSec Service API.<br></td><td>delete_allowlist_item <br/>Remediation<br></td></tr>
-<tr><td>Delete Allowlist<br></td><td>Permanently delete a specific allowlist in the CrowdSec Service API by its ID.<br></td><td>delete_allowlist <br/>Remediation<br></td></tr>
-<tr><td>List Integrations<br></td><td>Retrieve a list of all integrations available in the CrowdSec Service API.<br></td><td>list_integrations <br/>Investigation<br></td></tr>
-<tr><td>Create Integration<br></td><td>Create a new integration with a firewall or remediation system, managed by your organization.<br></td><td>create_integration <br/>Remediation<br></td></tr>
-<tr><td>Get Integration<br></td><td>Retrieve the details of a specific integration by its ID, including associated blocklists and configuration.<br></td><td>get_integration <br/>Investigation<br></td></tr>
-<tr><td>Update Integration<br></td><td>Update the details of an existing integration, including name, description, output format, and credentials.<br></td><td>update_integration <br/>Remediation<br></td></tr>
-<tr><td>Delete Integration<br></td><td>Permanently delete an existing integration by its unique ID from the CrowdSec Service API.<br></td><td>delete_integration <br/>Remediation<br></td></tr>
-</tbody></table>
+The following automated operations can be included in playbooks and you can also use the annotations to access operations:
+
+| Function                     | Description                                                                                                                                                  | Annotation and Category                         |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| Get IP Reputation            | Retrieves detailed threat intelligence, reputation scoring, and behavioral context for a given IP address using the CrowdSec CTI API.                        | get_ip_reputation <br />Investigation           |
+| Search IP Reputation         | Searches CrowdSec Cyber Threat Intelligence for IP addresses matching a Lucene query, with optional time filtering and pagination.                           | search_ip_reputation <br />Investigation        |
+| Batch Get IP Reputation      | Retrieves threat intelligence and reputation data for multiple IP addresses in a single request using the CrowdSec CTI API.                                  | batch_get_ip_reputation <br />Investigation     |
+| Get Fire IPs                 | Retrieves a paginated list of malevolent IP addresses from the CrowdSec CTI API, with optional filtering based on last modification time.                    | get_malevolent_ips <br />Investigation          |
+| List All Blocklists          | Retrieves all blocklists configured in the CrowdSec Service (Admin) API for the authenticated organization.                                                  | list_blocklists <br />Investigation             |
+| Create New Blocklist         | Creates a new custom blocklist in the CrowdSec Service (Admin) API for organizing and enforcing threat containment policies.                                 | create_blocklist <br />Containment              |
+| Update Blocklist             | Updates the metadata and CTI-driven configuration of an existing blocklist in the CrowdSec Service (Admin) API.                                              | update_blocklist <br />Containment              |
+| Add IPs to Blocklist         | Adds one or more IP addresses to a specific blocklist in the CrowdSec Service API. If an IP already exists in the blocklist, the expiration date is updated. | add_ips_to_blocklist <br />Containment          |
+| Get Blocklist IPs            | Retrieves all IP addresses currently listed in a specific blocklist from the CrowdSec Service API.                                                           | get_blocklist_ips <br />Investigation           |
+| Delete IPs from Blocklist    | Removes one or more IP addresses from a specific blocklist in the CrowdSec Service API.                                                                      | delete_ips_from_blocklist <br />Containment     |
+| Bulk Overwrite Blocklist IPs | Replaces all existing IP addresses in a specific blocklist with a new set of IPs. Existing entries will be fully overwritten.                                | bulk_overwrite_blocklist_ips <br />Containment  |
+| Get Specific Blocklist       | Retrieves detailed information about a specific blocklist in the CrowdSec Service API by its ID.                                                             | get_blocklist <br />Investigation               |
+| Delete Blocklist             | Permanently deletes a specific blocklist in the CrowdSec Service API by its ID. All IPs and metadata in the blocklist will be removed.                       | delete_blocklist <br />Containment              |
+| List All Allowlists          | Retrieves a list of all allowlists configured in the CrowdSec Service API.                                                                                   | list_allowlists <br />Investigation             |
+| Create New Allowlist         | Creates a new custom allowlist in the CrowdSec Service API to define IPs that should be explicitly allowed or excluded from automatic blocking.              | create_allowlist <br />Remediation              |
+| Get Items in Allowlist       | Retrieves all IP addresses or entries contained in a specific allowlist from the CrowdSec Service API.                                                       | get_allowlist_items <br />Investigation         |
+| Add IPs to Allowlist         | Adds one or more IP addresses to a specific allowlist in the CrowdSec Service API.                                                                           | add_items_to_allowlist <br />Remediation        |
+| Get Specific Allowlist Item  | Retrieves detailed information about a specific allowlist item by its ID from the CrowdSec Service API.                                                      | get_specific_allowlist_item <br />Investigation |
+| Update Allowlist             | Modifies the name or description of an existing allowlist in the CrowdSec Service API.                                                                       | update_allowlist <br />Remediation              |
+| Delete Item from Allowlist   | Removes a specific item from an existing allowlist in the CrowdSec Service API.                                                                              | delete_allowlist_item <br />Remediation         |
+| Delete Allowlist             | Permanently deletes a specific allowlist in the CrowdSec Service API by its ID.                                                                              | delete_allowlist <br />Remediation              |
+| List Integrations            | Retrieves a list of all integrations available in the CrowdSec Service API.                                                                                  | list_integrations <br />Investigation           |
+| Create Integration           | Creates a new integration with a firewall or remediation system, managed by your organization.                                                               | create_integration <br />Remediation            |
+| Get Integration              | Retrieves the details of a specific integration by its ID, including associated blocklists and configuration.                                                | get_integration <br />Investigation             |
+| Update Integration           | Updates the details of an existing integration, including name, description, output format, and credentials.                                                 | update_integration <br />Remediation            |
+| Delete Integration           | Permanently deletes an existing integration by its unique ID from the CrowdSec Service API.                                                                  | delete_integration <br />Remediation            |
 
 ### operation: Get IP Reputation
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>IP Address<br></td><td>Specify the IPv4 or IPv6 address to investigate for malicious activity, reputation, and threat context.<br>
-</td></tr></tbody></table>
+| Parameter  | Description                                                                                             |
+|------------|---------------------------------------------------------------------------------------------------------|
+| IP Address | Specify the IPv4 or IPv6 address to investigate for malicious activity, reputation, and threat context. |
 
 #### Output
 
@@ -165,11 +171,12 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Query<br></td><td>Lucene query used to filter IPs based on CrowdSec CTI fields such as behaviors, classifications, ASN, or location.<br>
-</td></tr><tr><td>Since<br></td><td>Restrict results to IPs observed within a given time window.<br>
-</td></tr><tr><td>Page<br></td><td>Page number used for paginated results.<br>
-</td></tr><tr><td>Limit<br></td><td>Maximum number of IP results returned per page.<br>
-</td></tr></tbody></table>
+| Parameter | Description                                                                                                        |
+|-----------|--------------------------------------------------------------------------------------------------------------------|
+| Query     | Lucene query used to filter IPs based on CrowdSec CTI fields such as behaviors, classifications, ASN, or location. |
+| Since     | Restrict results to IPs observed within a given time window.                                                       |
+| Page      | Page number used for paginated results.                                                                            |
+| Limit     | Maximum number of IP results returned per page.                                                                    |
 
 #### Output
 
@@ -255,8 +262,9 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>IP Addresses<br></td><td>Specify the list of IPv4 and/or IPv6 addresses to query in bulk.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                      |
+|--------------|------------------------------------------------------------------|
+| IP Addresses | Specify the list of IPv4 and/or IPv6 addresses to query in bulk. |
 
 #### Output
 
@@ -342,10 +350,11 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Page<br></td><td>Page number used to paginate through the list of malevolent IPs.<br>
-</td></tr><tr><td>Limit<br></td><td>Maximum number of malevolent IP records returned per page.<br>
-</td></tr><tr><td>Since<br></td><td>Filter results to include only IPs updated within a specified time window.<br>
-</td></tr></tbody></table>
+| Parameter | Description                                                                |
+|-----------|----------------------------------------------------------------------------|
+| Page      | Page number used to paginate through the list of malevolent IPs.           |
+| Limit     | Maximum number of malevolent IP records returned per page.                 |
+| Since     | Filter results to include only IPs updated within a specified time window. |
 
 #### Output
 
@@ -445,12 +454,12 @@ The output contains the following populated JSON schema:
 
 ```
 {
-    "items": [],
-    "total": "",
-    "page": "",
-    "size": "",
-    "pages": "",
-    "links": {}
+  "items": [],
+  "total": "",
+  "page": "",
+  "size": "",
+  "pages": "",
+  "links": {}
 }
 ```
 
@@ -458,9 +467,10 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Blocklist Name<br></td><td>Unique name used to identify the blocklist within the CrowdSec organization.<br>
-</td></tr><tr><td>Description<br></td><td>Optional explanation of the blocklist’s purpose and usage.<br>
-</td></tr></tbody></table>
+| Parameter      | Description                                                                  |
+|----------------|------------------------------------------------------------------------------|
+| Blocklist Name | Unique name used to identify the blocklist within the CrowdSec organization. |
+| Description    | Optional explanation of the blocklist's purpose and usage.                   |
 
 #### Output
 
@@ -491,14 +501,15 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Blocklist ID<br></td><td>Unique identifier of the blocklist that will be updated.<br>
-</td></tr><tr><td>Label<br></td><td>Display label shown for the blocklist in the CrowdSec console and APIs.<br>
-</td></tr><tr><td>Description<br></td><td>Detailed explanation of the blocklist’s intent, scope, and usage.<br>
-</td></tr><tr><td>References<br></td><td>Supporting references associated with the blocklist.<br>
-</td></tr><tr><td>Tags<br></td><td>Tags used to classify and organize the blocklist.<br>
-</td></tr><tr><td>CTI Query<br></td><td>Lucene query used to select IPs from CrowdSec CTI when populating the blocklist.<br>
-</td></tr><tr><td>Since Period<br></td><td>Relative time window applied to the CTI query to filter IPs by recency.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                                      |
+|--------------|----------------------------------------------------------------------------------|
+| Blocklist ID | Unique identifier of the blocklist that will be updated.                         |
+| Label        | Display label shown for the blocklist in the CrowdSec console and APIs.          |
+| Description  | Detailed explanation of the blocklist's intent, scope, and usage.                |
+| References   | Supporting references associated with the blocklist.                             |
+| Tags         | Tags used to classify and organize the blocklist.                                |
+| CTI Query    | Lucene query used to select IPs from CrowdSec CTI when populating the blocklist. |
+| Since Period | Relative time window applied to the CTI query to filter IPs by recency.          |
 
 #### Output
 
@@ -531,10 +542,11 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Blocklist ID<br></td><td>Unique identifier of the blocklist to which IPs will be added.<br>
-</td></tr><tr><td>IP Addresses<br></td><td>IP addresses to add to the blocklist.<br>
-</td></tr><tr><td>Expiration Date<br></td><td>Date and time when the IP entry should expire and be automatically removed from the blocklist.<br>
-</td></tr></tbody></table>
+| Parameter       | Description                                                                                    |
+|-----------------|------------------------------------------------------------------------------------------------|
+| Blocklist ID    | Unique identifier of the blocklist to which IPs will be added.                                 |
+| IP Addresses    | IP addresses to add to the blocklist.                                                          |
+| Expiration Date | Date and time when the IP entry should expire and be automatically removed from the blocklist. |
 
 #### Output
 
@@ -542,8 +554,8 @@ The output contains the following populated JSON schema:
 
 ```
 {
-    "status": "",
-    "message": ""
+  "status": "",
+  "message": ""
 }
 ```
 
@@ -551,8 +563,9 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Blocklist ID<br></td><td>Unique identifier of the blocklist from which to fetch IP addresses.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                          |
+|--------------|----------------------------------------------------------------------|
+| Blocklist ID | Unique identifier of the blocklist from which to fetch IP addresses. |
 
 #### Output
 
@@ -560,8 +573,8 @@ The output contains the following populated JSON schema:
 
 ```
 {
-    "blocklist_id": "",
-    "ips": []
+  "blocklist_id": "",
+  "ips": []
 }
 ```
 
@@ -569,9 +582,10 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Blocklist ID<br></td><td>Unique identifier of the blocklist from which the IPs will be removed.<br>
-</td></tr><tr><td>IP Addresses<br></td><td>IP addresses to be removed from the blocklist.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                            |
+|--------------|------------------------------------------------------------------------|
+| Blocklist ID | Unique identifier of the blocklist from which the IPs will be removed. |
+| IP Addresses | IP addresses to be removed from the blocklist.                         |
 
 #### Output
 
@@ -588,10 +602,11 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Blocklist ID<br></td><td>Unique identifier of the blocklist to be overwritten.<br>
-</td></tr><tr><td>IP Addresses<br></td><td>New IP addresses that will replace all existing entries in the blocklist.<br>
-</td></tr><tr><td>Expiration Date<br></td><td>Date and time when the new IP entries should expire and be automatically removed from the blocklist.<br>
-</td></tr></tbody></table>
+| Parameter       | Description                                                                                          |
+|-----------------|------------------------------------------------------------------------------------------------------|
+| Blocklist ID    | Unique identifier of the blocklist to be overwritten.                                                |
+| IP Addresses    | New IP addresses that will replace all existing entries in the blocklist.                            |
+| Expiration Date | Date and time when the new IP entries should expire and be automatically removed from the blocklist. |
 
 #### Output
 
@@ -609,8 +624,9 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Blocklist ID<br></td><td>Unique identifier of the blocklist to retrieve.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                     |
+|--------------|-------------------------------------------------|
+| Blocklist ID | Unique identifier of the blocklist to retrieve. |
 
 #### Output
 
@@ -640,8 +656,9 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Blocklist ID<br></td><td>Specify the unique identifier of the blocklist to be deleted.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                   |
+|--------------|---------------------------------------------------------------|
+| Blocklist ID | Specify the unique identifier of the blocklist to be deleted. |
 
 #### Output
 
@@ -679,9 +696,10 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Allowlist Name<br></td><td>Specify the unique name to identify this allowlist.<br>
-</td></tr><tr><td>Description<br></td><td>Optional description explaining the purpose of this allowlist.<br>
-</td></tr></tbody></table>
+| Parameter      | Description                                                    |
+|----------------|----------------------------------------------------------------|
+| Allowlist Name | Specify the unique name to identify this allowlist.            |
+| Description    | Optional description explaining the purpose of this allowlist. |
 
 #### Output
 
@@ -702,8 +720,9 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Allowlist ID<br></td><td>Specify the unique identifier of the allowlist whose items you want to retrieve.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                                      |
+|--------------|----------------------------------------------------------------------------------|
+| Allowlist ID | Specify the unique identifier of the allowlist whose items you want to retrieve. |
 
 #### Output
 
@@ -724,11 +743,12 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Allowlist ID<br></td><td>Specify the unique identifier of the allowlist to which IPs will be added.<br>
-</td></tr><tr><td>IP Addresses<br></td><td>Specify the IP addresses to add to the allowlist.<br>
-</td></tr><tr><td>Description<br></td><td>Optional description for the added IPs.<br>
-</td></tr><tr><td>Expiration Date<br></td><td>Optional expiration date for these allowlist items.<br>
-</td></tr></tbody></table>
+| Parameter       | Description                                                                |
+|-----------------|----------------------------------------------------------------------------|
+| Allowlist ID    | Specify the unique identifier of the allowlist to which IPs will be added. |
+| IP Addresses    | Specify the IP addresses to add to the allowlist.                          |
+| Description     | Optional description for the added IPs.                                    |
+| Expiration Date | Optional expiration date for these allowlist items.                        |
 
 #### Output
 
@@ -745,9 +765,10 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Allowlist ID<br></td><td>Specify the Unique identifier of the allowlist containing the item.<br>
-</td></tr><tr><td>Item ID<br></td><td>Specify the ID of the allowlist item you want to fetch.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                         |
+|--------------|---------------------------------------------------------------------|
+| Allowlist ID | Specify the Unique identifier of the allowlist containing the item. |
+| Item ID      | Specify the ID of the allowlist item you want to fetch.             |
 
 #### Output
 
@@ -778,10 +799,11 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Allowlist ID<br></td><td>Specif the Unique identifier of the allowlist to update.<br>
-</td></tr><tr><td>Name<br></td><td>Specify the new name for the allowlist.<br>
-</td></tr><tr><td>Description<br></td><td>Specify the new description for the allowlist<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                              |
+|--------------|----------------------------------------------------------|
+| Allowlist ID | Specif the Unique identifier of the allowlist to update. |
+| Name         | Specify the new name for the allowlist.                  |
+| Description  | Specify the new description for the allowlist            |
 
 #### Output
 
@@ -806,9 +828,10 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Allowlist ID<br></td><td>Specify the Unique identifier of the allowlist containing the item to delete.<br>
-</td></tr><tr><td>Item ID<br></td><td>Specify the Unique identifier of the item to remove from the allowlist.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                                   |
+|--------------|-------------------------------------------------------------------------------|
+| Allowlist ID | Specify the Unique identifier of the allowlist containing the item to delete. |
+| Item ID      | Specify the Unique identifier of the item to remove from the allowlist.       |
 
 #### Output
 
@@ -825,9 +848,10 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Allowlist ID<br></td><td>Specify the Unique identifier of the allowlist you want to delete.<br>
-</td></tr><tr><td>Force Delete<br></td><td>Whether to force deletion even if the allowlist has subscribers.<br>
-</td></tr></tbody></table>
+| Parameter    | Description                                                        |
+|--------------|--------------------------------------------------------------------|
+| Allowlist ID | Specify the Unique identifier of the allowlist you want to delete. |
+| Force Delete | Whether to force deletion even if the allowlist has subscribers.   |
 
 #### Output
 
@@ -865,11 +889,12 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Name<br></td><td>Specify a unique name for this integration within your organization.<br>
-</td></tr><tr><td>Description<br></td><td>Provide a description explaining the purpose of this integration.<br>
-</td></tr><tr><td>Entity Type<br></td><td>Specify the type of integration (default: firewall_integration)<br>
-</td></tr><tr><td>Output Format<br></td><td>Choose the output format for the integration (default: plain_text)<br>
-</td></tr></tbody></table>
+| Parameter     | Description                                                          |
+|---------------|----------------------------------------------------------------------|
+| Name          | Specify a unique name for this integration within your organization. |
+| Description   | Provide a description explaining the purpose of this integration.    |
+| Entity Type   | Specify the type of integration (default: firewall\_integration)     |
+| Output Format | Choose the output format for the integration (default: plain\_text)  |
 
 #### Output
 
@@ -909,8 +934,9 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Integration ID<br></td><td>Specify the unique ID of the integration you want to retrieve<br>
-</td></tr></tbody></table>
+| Parameter      | Description                                                   |
+|----------------|---------------------------------------------------------------|
+| Integration ID | Specify the unique ID of the integration you want to retrieve |
 
 #### Output
 
@@ -947,12 +973,13 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Integration ID<br></td><td>Specify the unique ID of the integration you want to update<br>
-</td></tr><tr><td>Name<br></td><td>New name for the integration<br>
-</td></tr><tr><td>Description<br></td><td>New description for the integration<br>
-</td></tr><tr><td>Output Format<br></td><td>Updated output format for the integration (e.g., plain_text)<br>
-</td></tr><tr><td>Regenerate Credentials<br></td><td>Set to 'true' to regenerate API credentials for this integration.<br>
-</td></tr></tbody></table>
+| Parameter              | Description                                                       |
+|------------------------|-------------------------------------------------------------------|
+| Integration ID         | Specify the unique ID of the integration you want to update       |
+| Name                   | New name for the integration                                      |
+| Description            | New description for the integration                               |
+| Output Format          | Updated output format for the integration (e.g., plain\_text)     |
+| Regenerate Credentials | Set to 'true' to regenerate API credentials for this integration. |
 
 #### Output
 
@@ -992,8 +1019,9 @@ The output contains the following populated JSON schema:
 
 #### Input parameters
 
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Integration ID<br></td><td>Specify the unique ID of the integration you want to delete<br>
-</td></tr></tbody></table>
+| Parameter      | Description                                                 |
+|----------------|-------------------------------------------------------------|
+| Integration ID | Specify the unique ID of the integration you want to delete |
 
 #### Output
 
@@ -1008,7 +1036,7 @@ The output contains the following populated JSON schema:
 
 ## Included playbooks
 
-The `Sample - CrowdSec Cyber Threat Intelligence - 1.0.0` playbook collection comes bundled with the CrowdSec Cyber
+The *`Sample - CrowdSec Cyber Threat Intelligence - 1.0.0`* playbook collection comes bundled with the CrowdSec Cyber
 Threat Intelligence connector. These playbooks contain steps using which you can perform all supported actions. You can
 see bundled playbooks in the **Automation** > **Playbooks** section in FortiSOAR&trade; after importing the CrowdSec
 Cyber Threat Intelligence connector.

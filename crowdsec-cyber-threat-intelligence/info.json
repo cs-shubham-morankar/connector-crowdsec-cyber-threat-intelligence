@@ -73,7 +73,7 @@
     {
       "operation": "get_ip_reputation",
       "title": "Get IP Reputation",
-      "description": "Retrieve detailed threat intelligence, reputation scoring, and behavioral context for a given IP address using the CrowdSec CTI API.",
+      "description": "Retrieves detailed threat intelligence, reputation scoring, and behavioral context for a given IP address using the CrowdSec CTI API.",
       "category": "investigation",
       "annotation": "get_ip_reputation",
       "parameters": [
@@ -160,7 +160,7 @@
     {
       "operation": "search_ip_reputation",
       "title": "Search IP Reputation",
-      "description": "Search CrowdSec Cyber Threat Intelligence for IP addresses matching a Lucene query, with optional time filtering and pagination.",
+      "description": "Searches CrowdSec Cyber Threat Intelligence for IP addresses matching a Lucene query, with optional time filtering and pagination.",
       "category": "investigation",
       "annotation": "search_ip_reputation",
       "parameters": [
@@ -283,7 +283,7 @@
     {
       "operation": "batch_get_ip_reputation",
       "title": "Batch Get IP Reputation",
-      "description": "Retrieve threat intelligence and reputation data for multiple IP addresses in a single request using the CrowdSec CTI API.",
+      "description": "Retrieves threat intelligence and reputation data for multiple IP addresses in a single request using the CrowdSec CTI API.",
       "category": "investigation",
       "annotation": "batch_get_ip_reputation",
       "parameters": [
@@ -376,7 +376,7 @@
     {
       "operation": "get_malevolent_ips",
       "title": "Get Fire IPs",
-      "description": "Retrieve a paginated list of malevolent IP addresses from the CrowdSec CTI API, with optional filtering based on last modification time.",
+      "description": "Retrieves a paginated list of malevolent IP addresses from the CrowdSec CTI API, with optional filtering based on last modification time.",
       "category": "investigation",
       "annotation": "get_malevolent_ips",
       "parameters": [
@@ -497,7 +497,7 @@
     {
       "operation": "list_blocklists",
       "title": "List All Blocklists",
-      "description": "Retrieve all blocklists configured in the CrowdSec Service (Admin) API for the authenticated organization.",
+      "description": "Retrieves all blocklists configured in the CrowdSec Service (Admin) API for the authenticated organization.",
       "category": "investigation",
       "annotation": "list_blocklists",
       "parameters": [],
@@ -514,7 +514,7 @@
     {
       "operation": "create_blocklist",
       "title": "Create New Blocklist",
-      "description": "Create a new custom blocklist in the CrowdSec Service (Admin) API for organizing and enforcing threat containment policies.",
+      "description": "Creates a new custom blocklist in the CrowdSec Service (Admin) API for organizing and enforcing threat containment policies.",
       "category": "containment",
       "annotation": "create_blocklist",
       "parameters": [
@@ -562,7 +562,7 @@
     {
       "operation": "update_blocklist",
       "title": "Update Blocklist",
-      "description": "Update the metadata and CTI-driven configuration of an existing blocklist in the CrowdSec Service (Admin) API.",
+      "description": "Updates the metadata and CTI-driven configuration of an existing blocklist in the CrowdSec Service (Admin) API.",
       "category": "containment",
       "annotation": "update_blocklist",
       "parameters": [
@@ -662,7 +662,7 @@
     {
       "operation": "add_ips_to_blocklist",
       "title": "Add IPs to Blocklist",
-      "description": "Add one or more IP addresses to a specific blocklist in the CrowdSec Service API. If an IP already exists in the blocklist, its expiration date will be updated.",
+      "description": "Adds one or more IP addresses to a specific blocklist in the CrowdSec Service API. If an IP already exists in the blocklist, the expiration date is updated.",
       "category": "containment",
       "annotation": "add_ips_to_blocklist",
       "parameters": [
@@ -706,7 +706,7 @@
     {
       "operation": "get_blocklist_ips",
       "title": "Get Blocklist IPs",
-      "description": "Retrieve all IP addresses currently listed in a specific blocklist from the CrowdSec Service API.",
+      "description": "Retrieves all IP addresses currently listed in a specific blocklist from the CrowdSec Service API.",
       "category": "investigation",
       "annotation": "get_blocklist_ips",
       "parameters": [
@@ -730,7 +730,7 @@
     {
       "operation": "delete_ips_from_blocklist",
       "title": "Delete IPs from Blocklist",
-      "description": "Remove one or more IP addresses from a specific blocklist in the CrowdSec Service API.",
+      "description": "Removes one or more IP addresses from a specific blocklist in the CrowdSec Service API.",
       "category": "containment",
       "annotation": "delete_ips_from_blocklist",
       "parameters": [
@@ -764,7 +764,7 @@
     {
       "operation": "bulk_overwrite_blocklist_ips",
       "title": "Bulk Overwrite Blocklist IPs",
-      "description": "Replace all existing IP addresses in a specific blocklist with a new set of IPs. Existing entries will be fully overwritten.",
+      "description": "Replaces all existing IP addresses in a specific blocklist with a new set of IPs. Existing entries will be fully overwritten.",
       "category": "containment",
       "annotation": "bulk_overwrite_blocklist_ips",
       "parameters": [
@@ -809,7 +809,7 @@
     {
       "operation": "get_blocklist",
       "title": "Get Specific Blocklist",
-      "description": "Retrieve detailed information about a specific blocklist in the CrowdSec Service API by its ID.",
+      "description": "Retrieves detailed information about a specific blocklist in the CrowdSec Service API by its ID.",
       "category": "investigation",
       "annotation": "get_blocklist",
       "parameters": [
@@ -846,7 +846,7 @@
     {
       "operation": "delete_blocklist",
       "title": "Delete Blocklist",
-      "description": "Permanently delete a specific blocklist in the CrowdSec Service API by its ID. All IPs and metadata in the blocklist will be removed.",
+      "description": "Permanently deletes a specific blocklist in the CrowdSec Service API by its ID. All IPs and metadata in the blocklist will be removed.",
       "category": "containment",
       "annotation": "delete_blocklist",
       "parameters": [
@@ -870,7 +870,7 @@
     {
       "operation": "list_allowlists",
       "title": "List All Allowlists",
-      "description": "Retrieve a list of all allowlists configured in the CrowdSec Service API.",
+      "description": "Retrieves a list of all allowlists configured in the CrowdSec Service API.",
       "category": "investigation",
       "annotation": "list_allowlists",
       "parameters": [],
@@ -887,7 +887,7 @@
     {
       "operation": "create_allowlist",
       "title": "Create New Allowlist",
-      "description": "Create a new custom allowlist in the CrowdSec Service API to define IPs that should be explicitly allowed or excluded from automatic blocking.",
+      "description": "Creates a new custom allowlist in the CrowdSec Service API to define IPs that should be explicitly allowed or excluded from automatic blocking.",
       "category": "remediation",
       "annotation": "create_allowlist",
       "parameters": [
@@ -925,7 +925,7 @@
     {
       "operation": "get_allowlist_items",
       "title": "Get Items in Allowlist",
-      "description": "Retrieve all IP addresses or entries contained in a specific allowlist from the CrowdSec Service API.",
+      "description": "Retrieves all IP addresses or entries contained in a specific allowlist from the CrowdSec Service API.",
       "category": "investigation",
       "annotation": "get_allowlist_items",
       "parameters": [
@@ -953,7 +953,7 @@
     {
       "operation": "add_items_to_allowlist",
       "title": "Add IPs to Allowlist",
-      "description": "Add one or more IP addresses to a specific allowlist in the CrowdSec Service API.",
+      "description": "Adds one or more IP addresses to a specific allowlist in the CrowdSec Service API.",
       "category": "remediation",
       "annotation": "add_items_to_allowlist",
       "parameters": [
@@ -1007,7 +1007,7 @@
     {
       "operation": "get_specific_allowlist_item",
       "title": "Get Specific Allowlist Item",
-      "description": "Retrieve detailed information about a specific allowlist item by its ID from the CrowdSec Service API.",
+      "description": "Retrieves detailed information about a specific allowlist item by its ID from the CrowdSec Service API.",
       "category": "investigation",
       "annotation": "get_specific_allowlist_item",
       "parameters": [
@@ -1055,7 +1055,7 @@
     {
       "operation": "update_allowlist",
       "title": "Update Allowlist",
-      "description": "Modify the name or description of an existing allowlist in the CrowdSec Service API.",
+      "description": "Modifies the name or description of an existing allowlist in the CrowdSec Service API.",
       "category": "remediation",
       "annotation": "update_allowlist",
       "parameters": [
@@ -1107,7 +1107,7 @@
     {
       "operation": "delete_allowlist_item",
       "title": "Delete Item from Allowlist",
-      "description": "Remove a specific item from an existing allowlist in the CrowdSec Service API.",
+      "description": "Removes a specific item from an existing allowlist in the CrowdSec Service API.",
       "category": "remediation",
       "annotation": "delete_allowlist_item",
       "parameters": [
@@ -1141,7 +1141,7 @@
     {
       "operation": "delete_allowlist",
       "title": "Delete Allowlist",
-      "description": "Permanently delete a specific allowlist in the CrowdSec Service API by its ID.",
+      "description": "Permanently deletes a specific allowlist in the CrowdSec Service API by its ID.",
       "category": "remediation",
       "annotation": "delete_allowlist",
       "parameters": [
@@ -1175,7 +1175,7 @@
     {
       "operation": "list_integrations",
       "title": "List Integrations",
-      "description": "Retrieve a list of all integrations available in the CrowdSec Service API.",
+      "description": "Retrieves a list of all integrations available in the CrowdSec Service API.",
       "category": "investigation",
       "annotation": "list_integrations",
       "parameters": [],
@@ -1192,7 +1192,7 @@
     {
       "operation": "create_integration",
       "title": "Create Integration",
-      "description": "Create a new integration with a firewall or remediation system, managed by your organization.",
+      "description": "Creates a new integration with a firewall or remediation system, managed by your organization.",
       "category": "remediation",
       "annotation": "create_integration",
       "parameters": [
@@ -1271,7 +1271,7 @@
     {
       "operation": "get_integration",
       "title": "Get Integration",
-      "description": "Retrieve the details of a specific integration by its ID, including associated blocklists and configuration.",
+      "description": "Retrieves the details of a specific integration by its ID, including associated blocklists and configuration.",
       "category": "investigation",
       "annotation": "get_integration",
       "parameters": [
@@ -1315,7 +1315,7 @@
     {
       "operation": "update_integration",
       "title": "Update Integration",
-      "description": "Update the details of an existing integration, including name, description, output format, and credentials.",
+      "description": "Updates the details of an existing integration, including name, description, output format, and credentials.",
       "category": "remediation",
       "annotation": "update_integration",
       "parameters": [
@@ -1402,7 +1402,7 @@
     {
       "operation": "delete_integration",
       "title": "Delete Integration",
-      "description": "Permanently delete an existing integration by its unique ID from the CrowdSec Service API.",
+      "description": "Permanently deletes an existing integration by its unique ID from the CrowdSec Service API.",
       "category": "remediation",
       "annotation": "delete_integration",
       "parameters": [
