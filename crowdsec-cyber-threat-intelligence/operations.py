@@ -9,12 +9,9 @@ from connectors.core.connector import ConnectorError, get_logger
 import requests
 import ipaddress
 import re
+from .constants import DEFAULT_SERVICE_BASE_URL, DEFAULT_CTI_BASE_URL
 
 logger = get_logger('crowdsec-cyber-threat-intelligence')
-
-# Default URLs (fallback if not configured)
-DEFAULT_SERVICE_BASE_URL = "https://admin.api.crowdsec.net/v1"
-DEFAULT_CTI_BASE_URL = "https://cti.api.crowdsec.net/v2"
 
 
 class CrowdSecClient:
